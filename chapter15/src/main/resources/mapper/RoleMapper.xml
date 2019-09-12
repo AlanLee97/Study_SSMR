@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.dao.RoleDao">
+    <select id="getRole" parameterType="int" resultType="role">
+        select id,rolename as roleName, note from role where id=#{id}
+    </select>
+
+    <select id="findRoles" parameterType="com.study.pojo.PageParams" resultType="com.study.pojo.Role">
+        select id,roleName as roleName,note
+        from role
+        <where>
+            <if test="roleName != null">
+                and rolename like concat('%',#{roleName},'%')
+            </if>
+            <if test="note != null">
+                and note like concat('%',#{note},'%')
+            </if>
+        </where>
+        limit #{pageParams.start}, #{pageParams.limit}
+    </select>
+
+    <delete id="deleteRoles" parameterType="int">
+		delete from role where id = #{id}
+	</delete>
+
+    <insert id="insertRoles" parameterType="role">
+        insert into role values (null, #{roleName}, #{note})
+    </insert>
+
+    <insert id="insertRole" parameterType="role">
+        insert into role values (null, #{roleName}, #{note})
+    </insert>
+
+
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.StudentMapper">
+    
+    <resultMap id="StudentMapper" type="student">
+        <result property="id" column="id"/>
+        <result property="stuName" column="stuname" typeHandler="com.study.typehandler.MyTypeHandler"/>
+        <result property="gender" column="gender" typeHandler="com.study.typehandler.MyTypeHandler"/>
+        <result property="age" column="age" typeHandler="com.study.typehandler.MyTypeHandler"/>
+    </resultMap>
+    
+    <select id="findStudentById" parameterType="int" resultType="student">
+        select id,stuname as stuName,gender,age from tb_student where id=#{id}
+    </select>
+
+    <select id="findAllStudents" resultType="student">
+        select id,stuname as stuName,gender,age from tb_student
+    </select>
+</mapper>

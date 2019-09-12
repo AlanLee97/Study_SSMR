@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+<!--  spring中使用redis，需要配置5项内容-->
+
+<!--  1.配置redis数据库连接池-->
+  <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+    <!--  最大连接数-->
+    <property name="maxTotal" value="50"/>
+    <!--  最大空闲数-->
+    <property name="maxIdle" value="50"/>
+    <!--  最大等待时间-->
+    <property name="maxWaitMillis" value="20000"/>
+  </bean>
+
+<!--  2.配置数据库连接工厂，我使用的是JedisConnectionFactory-->
+  <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+    <property name="hostName" value="localhost"/>
+    <property name="port" value="6379"/>
+    <property name="poolConfig" ref="jedisPoolConfig"/>
+  </bean>
+
+<!--  为了需要把java对象直接存入redis，这里需要加入将对象序列化的配置，第3第4步为序列化配置-->
+<!--  3.配置StringRedisSerializer序列化，这个对应 键-->
+  <bean id="stringRedisSerializer"
+        class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+
+<!--  4.配置JdkSerializationRedisSerializer序列化，这个对应 值-->
+  <bean id="jdkSerializationRedisSerializer"
+        class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+
+<!--  5.配置redisTemplate-->
+  <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+    <property name="connectionFactory" ref="jedisConnectionFactory"/>
+    <property name="defaultSerializer" ref="stringRedisSerializer"/>
+    <property name="keySerializer" ref="stringRedisSerializer"/>
+<!--  为支持redis加减运算，把valueSerializer的序列化方式改为StringRedisSerializer-->
+    <property name="valueSerializer" ref="jdkSerializationRedisSerializer"/>
+<!--    把上一行注释，启用下面这一行-->
+<!--      <property name="valueSerializer" ref="stringRedisSerializer"/>-->
+  </bean>
+
+</beans>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/chapter03" />
+    <file type="web" url="file://$PROJECT_DIR$/chapter04" />
+    <file type="web" url="file://$PROJECT_DIR$/chapter05" />
+    <file type="web" url="file://$PROJECT_DIR$/chapter06" />
+    <file type="web" url="file://$PROJECT_DIR$/chapter09" />
+    <file type="web" url="file://$PROJECT_DIR$/chapter10" />
+    <file type="web" url="file://$PROJECT_DIR$/chapter11" />
+    <file type="web" url="file://$PROJECT_DIR$/chapter12" />
+    <file type="web" url="file://$PROJECT_DIR$/chapter13" />
+    <file type="web" url="file://$PROJECT_DIR$/chapter14" />
+    <file type="web" url="file://$PROJECT_DIR$/chapter15" />
+    <file type="web" url="file://$PROJECT_DIR$/chapter16" />
+    <file type="web" url="file://$PROJECT_DIR$/chapter17" />
+    <file type="web" url="file://$PROJECT_DIR$/chapter18" />
+  </component>
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/chapter03/pom.xml" />
+        <option value="$PROJECT_DIR$/chapter04/pom.xml" />
+        <option value="$PROJECT_DIR$/chapter05/pom.xml" />
+        <option value="$PROJECT_DIR$/chapter06/pom.xml" />
+        <option value="$PROJECT_DIR$/chapter09/pom.xml" />
+        <option value="$PROJECT_DIR$/chapter10/pom.xml" />
+        <option value="$PROJECT_DIR$/chapter11/pom.xml" />
+        <option value="$PROJECT_DIR$/chapter12/pom.xml" />
+        <option value="$PROJECT_DIR$/chapter13/pom.xml" />
+        <option value="$PROJECT_DIR$/chapter14/pom.xml" />
+        <option value="$PROJECT_DIR$/chapter15/pom.xml" />
+        <option value="$PROJECT_DIR$/chapter16/pom.xml" />
+        <option value="$PROJECT_DIR$/chapter17/pom.xml" />
+        <option value="$PROJECT_DIR$/chapter18/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

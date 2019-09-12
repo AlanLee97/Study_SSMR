@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.RoleMapper">
+    <!--查询数据-->
+    <!--根据id查询用户-->
+    <select id="getRole" resultType="role" parameterType="Integer">
+        select id,rolename as roleName,note
+        from role
+        where id=#{id}
+    </select>
+    <!--查询所有用户数据-->
+    <select id="findRoles" resultType="role" >
+        select id,rolename as roleName,note from role
+    </select>
+    
+    <!--插入数据-->
+    <insert id="insertRole" parameterType="com.study.pojo.Role">
+      INSERT INTO `ssmr`.`role`(`rolename`, `note`) VALUES ( #{roleName}, #{note})
+    </insert>
+    
+    
+    
+    <!--更新数据-->
+    <update id="updateRole" parameterType="com.study.pojo.Role">
+        UPDATE `ssmr`.`role` SET `rolename` = #{roleName} WHERE `id` = #{id}
+    </update>
+
+    
+    <!--删除数据-->
+    <delete id="deleteRole" parameterType="Integer">
+        DELETE FROM `ssmr`.`role` WHERE `id` = #{id}
+    </delete>
+
+
+    <select id="findRolesByNameAndNote" parameterType="map" resultType="role">
+        select id,rolename as roleName, note
+        from role
+        where roleName
+        like concat('%',#{roleName},'%')
+        and note
+        like concat('%',#{note},'%')
+
+    </select>
+    
+</mapper>

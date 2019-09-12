@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    
+    <properties resource="jdbc.properties"></properties>
+    
+    <typeAliases>
+        <typeAlias type="com.study.pojo.Student" alias="student"/>
+    </typeAliases>
+    
+    <typeHandlers>
+        <typeHandler handler="com.study.typehandler.MyTypeHandler" jdbcType="VARCHAR" javaType="String"/>
+    </typeHandlers>
+    
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${database.driver}"/>
+                <property name="url" value="${database.url}"/>
+                <property name="username" value="${database.username}"/>
+                <property name="password" value="${database.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--引入映射器有多种方法-->
+        <!--使用文件路径引入映射器-->
+        <mapper resource="mapper/StudentMapper.xml"></mapper>
+
+        <!--使用包名引入映射器-->
+        <!--<package name="com.study.com.study.mapper"/>-->
+
+        <!--使用类注册引入映射器-->
+        <!--<com.study.mapper class="com.study.com.study.mapper.StudentMapper"/>-->
+
+
+        <!--使用文件绝对路径引入映射器-->
+        <!--<com.study.mapper url="F:\Code\MyCode\Java\idea\javaweb\Study_SSMR\chapter04\src\main\resources\com.study.mapper\StudentMapper.xml"/>-->
+    </mappers>
+</configuration>

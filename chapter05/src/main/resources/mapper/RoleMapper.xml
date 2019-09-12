@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.dao.RoleMapper">
+<!--    使用resultMap作为映射结果集-->
+    <resultMap id="roleMap" type="roleA">
+        <id property="id" column="id"/>
+        <result property="roleName" column="rolename"/>
+        <result property="com.study.note" column="com.study.note"/>
+    </resultMap>
+
+<!--    sql语句-->
+    <sql id="roleCols">
+        ${var}.id,${var}.rolename,${var}.com.study.note
+    </sql>
+
+
+<!--    =============================分割线================================-->
+    <!--查询数据-->
+    <!--    使用resultMap作为映射结果集-->
+    <select id="findRolesUseResultMap" resultMap="roleMap" parameterType="int">
+        select id,rolename as roleName,com.study.note from roleA where id=#{id}
+    </select>
+
+    <!--根据id查询用户-->
+    <select id="getRole" resultType="roleA" parameterType="Integer">
+        select 
+        <include refid="roleCols">
+            <property name="var" value="roleA"/>
+        </include>
+        from roleA
+        where id=#{id}
+    </select>
+
+    <!--查询所有用户数据-->
+    <select id="findRoles" resultType="roleA" >
+        select id,rolename as roleName,com.study.note from roleA
+    </select>
+
+    <!--    通过map方式传递多个参数-->
+    <select id="findRolesByNameAndNote" parameterType="map" resultType="roleA">
+        select id,rolename as roleName, com.study.note
+        from roleA
+        where roleName
+        like concat('%',#{roleName},'%')
+        and com.study.note
+        like concat('%',#{com.study.note},'%')
+
+    </select>
+
+    <!--    通过注解传递多个参数-->
+    <select id="findRolesByAnnotation" resultType="roleA">
+        select id,rolename as roleName,com.study.note
+        from roleA
+        where roleName
+        like concat('%',#{roleName},'%')
+        and com.study.note
+        like concat('%',#{com.study.note},'%')
+    </select>
+
+    <!--    通过javaBean方式传递多个参数-->
+    <select id="findRolesByJavaBean" resultType="roleA">
+        select id,rolename as roleName,com.study.note
+        from roleA
+        where roleName
+        like concat('%',#{roleName},'%')
+        and com.study.note
+        like concat('%',#{com.study.note},'%')
+    </select>
+
+    <!--    通过几种方式混合传递多个参数-->
+    <select id="findRolesByMix" resultType="roleA">
+        select id,rolename as roleName,com.study.note
+        from roleA
+        where roleName
+        like concat('%',#{params.roleName},'%')
+        and com.study.note
+        like concat('%',#{params.com.study.note},'%')
+        limit #{page.start},#{page.limit}
+    </select>
+
+    <!--    分页参数 RowBounds-->
+    <select id="findRolesByRowBounds" resultType="roleA">
+        select id,rolename as roleName,com.study.note
+        from roleA
+        where roleName
+        like concat('%',#{roleName},'%')
+        and com.study.note
+        like concat('%',#{com.study.note},'%')
+    </select>
+    
+
+    
+    
+<!--    =============================分割线================================-->
+<!--    插入数据insert-->
+<!--    插入数据返回主键-->
+    <insert id="insertRole"
+            parameterType="roleA"
+            keyProperty="id"
+            useGeneratedKeys="true">
+        insert into roleA(rolename,com.study.note)
+        values (
+            #{roleName},
+            #{com.study.note}
+        )
+
+    </insert>
+
+<!--自定义主键-->
+    <insert id="insertRole2" parameterType="roleA">
+--         修改主键递增规则
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            select
+            if (max(id) = null , 1, max(id) + 3 ) from role2
+        </selectKey>
+        insert into role2(id,rolename,com.study.note)
+        values (#{id}, #{roleName},#{com.study.note})
+    </insert>
+
+
+
+<!--    =============================分割线================================-->
+<!--    更新数据-->
+
+
+
+<!--    =============================分割线================================-->
+<!--    删除数据-->
+
+
+
+</mapper>

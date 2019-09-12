@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- @version $Id: applicationContext.xml 561608 2007-08-01 00:33:12Z vgritsenko $ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--  BeanPostProcessor的定义-->
+  <bean id="banPostProcessor" class="com.study.bean.BeanPostProcessorImpl"/>
+<!--  DisposableBean的定义-->
+  <bean id="disposableBean" class="com.study.bean.DisposableBeanImpl"/>
+
+  <bean id="source" class="com.study.pojo.Source">
+    <property name="size" value="大杯"/>
+    <property name="fruit" value="草莓"/>
+    <property name="sugar" value="蜂蜜"/>
+  </bean>
+
+  <bean id="juiceMaker2" class="com.study.pojo.JuiceMaker2"
+        init-method="init" destroy-method="destroy">
+    <property name="beverageShop" value="皇茶"/>
+    <property name="source" ref="source"/>
+  </bean>
+
+</beans>
